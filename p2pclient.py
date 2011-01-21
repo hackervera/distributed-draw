@@ -78,7 +78,7 @@ def set(block,color):
 class reactive(threading.Thread):
   def run(self):
     print "starting reactor"
-    run(host='localhost', port=8080)
+    run(host='0.0.0.0', port=8080)
 
 
 reactive().start()
