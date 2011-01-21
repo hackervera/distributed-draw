@@ -1,0 +1,66 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<style>
+  .draw {
+    float: left;
+    background-color: green;
+    width: 10px;
+    height: 10px;
+  }
+</style>
+<div id="blocks"
+</div>
+<script>
+for(i=0;i<5000;i++){
+  $("#blocks").append('<div class="draw" id="'+i+'"></div>');
+}
+$(".draw").bind("click",function(){ changeColor(this,'blue'); });
+
+function changeColor(obj, color){
+  obj = $(obj);
+  backgroundColor = obj.css('background-color');
+  console.log(backgroundColor);
+  id = obj.attr('id');
+  if (backgroundColor == "rgb(0, 128, 0)") {
+    obj.css('background-color', color);
+    
+  } else {
+    obj.css('background-color', 'green');
+  }
+  console.log(id);
+  obj.data('color', color);
+  console.log(obj.data('color'));
+  backgroundColor = obj.css('background-color');
+  $.get("/set/"+id+"/"+backgroundColor, function(data){ console.log(data) });
+}
+
+function changeColorNoSend(obj, color){
+  obj = $(obj);
+  id = obj.attr('id');
+  obj.css('background-color', color);
+  backgroundColor = obj.css('background-color');
+}
+
+
+function getColors(){
+  $.getJSON("/blocks",function(json){ 
+    console.log(json);
+    for(i=0;i<json.length;i++){
+      block = json[i];
+      changeColorNoSend($("#"+block.number), block.result);
+    }
+  });
+}
+
+getColors();
+
+function reloader(){
+  setTimeout(function(){
+    getColors();
+    reloader();
+  }, 8000);
+}
+
+//reloader();
+
+  
+</script>
