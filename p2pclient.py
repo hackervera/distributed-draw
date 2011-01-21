@@ -60,7 +60,7 @@ def readStuff(command,block,color):
 
 @route('/:filename')
 def server_static(filename):
-    return static_file(filename, root='/home/tyler/entangled-0.1/public')  
+    return static_file(filename, root='./public')  
     
 @route('/blocks')
 def blocks():
