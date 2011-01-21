@@ -84,7 +84,7 @@ class reactive(threading.Thread):
 reactive().start()
 print "and other stuff..."   
 node = entangled.dtuple.DistributedTupleSpacePeer(3000)
-node.joinNetwork([("127.0.0.1",int(4000))])
+node.joinNetwork([("24.20.43.230 ",int(4000))])
 reactor.run()
 
 
